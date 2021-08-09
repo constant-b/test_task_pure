@@ -9,9 +9,8 @@ document.getElementById("fileLoadInput").addEventListener("change", function (ev
         form_data.append("file", this.files[i]);
 
         let progressBar     = readURL(this.files[i]),
-            progressBarWrap = Array.from(progressBar.childNodes).find(node => node.className === "custom-progress-bar");
-
-        let request = new XMLHttpRequest();
+            progressBarWrap = Array.from(progressBar.childNodes).find(node => node.className === "custom-progress-bar"),
+            request         = new XMLHttpRequest();
 
         request.upload.addEventListener("progress", function (ev) {
 
@@ -30,6 +29,10 @@ document.getElementById("fileLoadInput").addEventListener("change", function (ev
 
             progressBarWrap.style.background = response.success ? "#70b860" : "#843534";
             progressBarWrap.innerHTML        = response.success ? "Done!" : "Can't load file!";
+
+            setTimeout(function () {
+                progressBarWrap.remove();
+            }, 3000);
         });
 
         request.upload.addEventListener("error", function () {
