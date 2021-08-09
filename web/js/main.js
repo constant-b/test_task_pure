@@ -1,4 +1,4 @@
-let allowed_preview_types = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+let allowed_preview_types = ['image/jpeg', 'image/jpg', 'image/png'];
 
 document.getElementById("fileLoadInput").addEventListener("change", function (ev) {
 
