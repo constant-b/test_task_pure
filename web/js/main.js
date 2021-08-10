@@ -25,7 +25,13 @@ document.getElementById("fileLoadInput").addEventListener("change", function (ev
         }, false);
 
         request.addEventListener("load", function () {
-            let response = JSON.parse(this.responseText);
+            let response;
+
+            try {
+                response = JSON.parse(this.responseText);
+            } catch (e) {
+                response = {success: false};
+            }
 
             progressBarWrap.style.background = response.success ? "#70b860" : "#843534";
             progressBarWrap.innerHTML        = response.success ? "Done!" : "Can't load file!";
@@ -49,6 +55,9 @@ document.getElementById("fileLoadInput").addEventListener("change", function (ev
 
 }, false);
 
+document.getElementById("fileLoadInputButton").addEventListener("click", function () {
+    document.getElementById("fileLoadInput").click();
+}, false);
 
 function readURL(file) {
     let reader             = new FileReader(),
